@@ -18,16 +18,16 @@ export class QueryService {
         message: "Succes fetch data",
         total: UserTotal,
         data: Users.map((Users) => {
-          return{...Users, password:null}
+          return { ...Users, password: null }
         }),
-        status:200
+        status: 200
       })
     } catch (error: any) {
       return (handleErrorManyRespones({
         code: "INTERNAL-SERVER.ERROR",
         error: error,
         message: error.message,
-        status:401
+        status: 401
       }))
     }
   }
@@ -35,38 +35,41 @@ export class QueryService {
   // find one
   static async findOneUser(userId: number): Promise<IOneResponse> {
     try {
+      console.log(userId);
       if (!userId) {
         return handleErrorOneRespones({
           code: "BAD_REQUEST",
           message: "USER ID IS REQUIRED",
           error: {},
-          status:401
+          status: 401
         });
       }
- 
+
       const user = await this.userRepository.findOneBy({ id: userId });
+      console.log("Fetched User:", user);
 
       if (!user) {
         return handleErrorOneRespones({
           code: "NOT_FOUND",
           message: "USER NOT FOUND",
           error: {},
-          status:401
+          status: 401
         });
       }
 
       return handleSuccesOneRespones({
         code: "SUCCESS",
         message: "Fetch user data successful",
-        data: {...user,password:null},
-        status:200
+        data: { ...user, password: null },
+        status: 200
       });
     } catch (error) {
+      console.log(error);
       return handleErrorOneRespones({
         code: "NOT_FOUND",
         message: "USER NOT FOUND",
         error: {},
-        status:401
+        status: 401
       });
     }
   }

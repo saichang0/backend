@@ -188,7 +188,7 @@ export class MutationService {
                 id: existEmail.id,
                 fullname: existEmail.fullname,
             }
-            const token = jwt.sign(payload, process.env.JWT_SECRET as string, { expiresIn: "1h" })
+            const token = jwt.sign(payload, "abc", { expiresIn: "1h" })
 
             // 5 return data to client
             return handleSuccesOneRespones({
@@ -207,25 +207,6 @@ export class MutationService {
             })
         }
     }
-
-    // forgot password
-    // static async Forgot(email: string): Promise<IOneResponse> {
-    //     if (!email) {
-    //         return handleErrorOneRespones({
-    //             code: "BAD REQEST",
-    //             message: "Email are incorrect",
-    //             error: {},
-    //             status: 401
-    //         })
-    //     }catch(error) {
-    //         return handleErrorOneRespones({
-    //             code: "BAD REQEST",
-    //             message: "Email are incorrect",
-    //             error: {},
-    //             status: 401
-    //         })
-    //     }
-    // }
 
     // register
     static async Register(data: any): Promise<IOneResponse> {

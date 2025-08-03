@@ -23,13 +23,14 @@ export const accessAuthenticate = (req: Request, res: Response, next: NextFuncti
       ? authHeader.slice(7)
       : authHeader;
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as User;
+    const decoded = jwt.verify(token, "abc") as User;
     const userId = String(decoded?.id);
-
     //  Don't overwrite req.body, just add to it
+    if(!req.body) req.body = {};
     req.body.userId = userId;
     next();
   } catch (error) {
+      console.error("❌ JWT verification error:", error);
     return res.status(401).json(
       handleErrorOneRespones({
         code: "INVALID_TOKEN",

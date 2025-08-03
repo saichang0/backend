@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { User } from '../modules/users/user.entity';
+import { Post } from '../modules/posts/posts.entity';
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
@@ -11,5 +12,5 @@ export const AppDataSource = new DataSource({
   database: 'master_backend_db', 
   synchronize: true, // use false in production
   logging: false,
-  entities: [User],
+  entities: [User,Post],
 });

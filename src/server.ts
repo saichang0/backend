@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import basicApiroute from './modules/basicApi/routes';
 import { AppDataSource } from "./database/dbConnecte";
 import userRoute from "./modules/users/routes";
+import postRoute from "./modules/posts/routes";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,9 @@ app.use("/", basicApiroute);
 
 // use route user
 app.use("/user",userRoute)
+
+// use route post
+app.use("/post",postRoute)
 
 // connect to batabase
 AppDataSource.initialize().then(()=>{
